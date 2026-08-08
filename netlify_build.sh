@@ -27,25 +27,20 @@ echo "firebase_options.dart successfully generated."
 # We use the Netlify cache directory if available, otherwise fallback to $HOME/.cache
 CACHE_DIR="${NETLIFY_CACHE_DIR:-$HOME/.cache}"
 FLUTTER_SDK_DIR="$CACHE_DIR/flutter"
-FLUTTER_REVISION="84fc5cbb22bc12f83d65b647ff8a56caf779ffd"
 
 echo "Using Cache Directory: $CACHE_DIR"
-echo "Target Flutter Revision: $FLUTTER_REVISION"
 
 if [ ! -d "$FLUTTER_SDK_DIR/.git" ]; then
-  echo "Flutter SDK not found in cache. Cloning Flutter repository..."
+  echo "Flutter SDK not found in cache. Cloning Flutter repository (stable channel)..."
   rm -rf "$FLUTTER_SDK_DIR"
-  git clone https://github.com/flutter/flutter.git "$FLUTTER_SDK_DIR"
+  git clone https://github.com/flutter/flutter.git --depth 1 -b stable "$FLUTTER_SDK_DIR"
 else
-  echo "Flutter SDK found in cache."
+  echo "Flutter SDK found in cache. Updating to latest stable..."
+  cd "$FLUTTER_SDK_DIR"
+  git fetch origin stable
+  git reset --hard origin/stable
+  cd -
 fi
-
-# Navigate to Flutter SDK to fetch and checkout the correct revision
-cd "$FLUTTER_SDK_DIR"
-echo "Updating/Checking out Flutter revision $FLUTTER_REVISION..."
-git fetch origin
-git checkout "$FLUTTER_REVISION"
-cd -
 
 # Add Flutter to the path
 export PATH="$PATH:$FLUTTER_SDK_DIR/bin"
