@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "846094584382",
+    "project_id": "unsaid-c0fec",
+    "storage_bucket": "unsaid-c0fec.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846094584382:android:85437e7e512964205d1f6f",
+        "android_client_info": {
+          "package_name": "com.example.unsaid_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChN1duDP8lpsBEFK2DGzFYOD2PD11suFc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
