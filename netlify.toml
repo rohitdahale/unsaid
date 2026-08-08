@@ -1,0 +1,9 @@
+[build]
+  command = "bash netlify_build.sh"
+  publish = "build/web"
+
+# Redirect rule for Single Page Application (SPA) routing (e.g., go_router)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
