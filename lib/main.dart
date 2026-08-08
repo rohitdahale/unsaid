@@ -22,9 +22,13 @@ import 'state/theme_state.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
+  print('DEBUG: Initializing Firebase...');
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  print('DEBUG: Firebase initialization completion.');
+  print('DEBUG: Firebase project ID: ${Firebase.app().options.projectId}');
+  print('DEBUG: Firebase app ID: ${Firebase.app().options.appId}');
 
   // Setup Crashlytics error logging on native platforms
   if (!kIsWeb) {

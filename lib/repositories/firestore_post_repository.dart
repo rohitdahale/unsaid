@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../core/firebase_error_handler.dart';
 import '../data/models/domain_models.dart';
 import 'post_repository.dart';
@@ -21,6 +22,15 @@ class FirestorePostRepository implements PostRepository {
   @override
   Future<List<Post>> getPosts({PostStatus? status}) async {
     try {
+      final auth = FirebaseAuth.instance;
+      print('DEBUG [getPosts]: Starting getPosts() execution.');
+      print('DEBUG [getPosts]: Firebase project ID: ${_firestore.app.options.projectId}');
+      print('DEBUG [getPosts]: Firebase app ID: ${_firestore.app.options.appId}');
+      print('DEBUG [getPosts]: currentUser == null: ${auth.currentUser == null}');
+      if (auth.currentUser != null) {
+        print('DEBUG [getPosts]: currentUser UID: ${auth.currentUser!.uid}');
+      }
+
       final ref = _firestore.collection('posts');
       Query query = ref;
       
